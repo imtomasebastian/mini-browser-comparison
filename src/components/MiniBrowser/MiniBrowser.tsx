@@ -1,6 +1,26 @@
 import { Fragment, useState } from 'react'
 import './MiniBrowser.css'
-import { CometBorder } from './CometBorder.jsx'
+import { CometBorder } from './CometBorder'
+
+// ─── Types ────────────────────────────────────────────────────────────────────
+
+interface AppItem {
+  id: string
+  icon: React.ReactNode
+  name: string
+  rating: string
+  reviewCount: string
+  meta: string
+  badge: React.ReactNode | null
+  installUrl: string | null
+  disabled: boolean
+}
+
+interface TabItem {
+  id: string
+  icon: React.ReactNode
+  label: string
+}
 
 // ─── Icons ───────────────────────────────────────────────────────────────────
 
@@ -204,12 +224,12 @@ function WindowControls() {
   )
 }
 
-const TABS = [
+const TABS: TabItem[] = [
   { id: 'shopify', icon: <ShopifyIcon />, label: 'Shopify App Store' },
   { id: 'g2', icon: <G2Icon />, label: 'G2 Software Reviews' },
 ]
 
-function Tab({ tab, isActive, onClick }) {
+function Tab({ tab, isActive, onClick }: { tab: TabItem; isActive: boolean; onClick: () => void }) {
   return (
     <button
       className={`mb-tab${isActive ? ' mb-tab--active' : ''}`}
@@ -223,7 +243,7 @@ function Tab({ tab, isActive, onClick }) {
   )
 }
 
-function InstallButton({ href }) {
+function InstallButton({ href }: { href: string | null }) {
   if (!href) {
     return (
       <div className="mb-btn-wrapper mb-btn-wrapper--secondary" aria-disabled="true">
@@ -250,7 +270,7 @@ function InstallButton({ href }) {
   )
 }
 
-function ListItem({ app }) {
+function ListItem({ app }: { app: AppItem }) {
   return (
     <div className={`mb-list-item${app.disabled ? ' mb-list-item--disabled' : ''}`}>
       <div className="mb-app-icon">{app.icon}</div>
@@ -272,7 +292,7 @@ function ListItem({ app }) {
   )
 }
 
-const APPS = [
+const APPS: AppItem[] = [
   {
     id: 'smile',
     icon: <SmileAppIcon />,
