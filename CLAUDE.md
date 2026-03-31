@@ -18,7 +18,7 @@ React component library built from Paper MCP designs. The main design frame in P
 
 ## Stack
 
-- React 19, Vite 8, plain JavaScript (no TypeScript — do not convert)
+- React 19, Vite 8, TypeScript
 - CSS with custom properties and nested syntax (no CSS-in-JS)
 - ESLint flat config (`eslint.config.js`) — run `npm run lint` to validate
 - Prettier for formatting — run `npx prettier --write <file>` or let the hook handle it
