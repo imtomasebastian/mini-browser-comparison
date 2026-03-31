@@ -1,0 +1,324 @@
+/* ─── Animated border property ──────────────────────────────────────────────── */
+
+@property --border-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
+/* ─── Root ──────────────────────────────────────────────────────────────────── */
+
+.mini-browser {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+  width: 552px;
+  border-radius: 16px;
+  background-color: #f4f4f6;
+  overflow: clip;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-synthesis: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── Browser bar ───────────────────────────────────────────────────────────── */
+
+.mb-browser-bar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  padding-inline: 12px;
+  align-self: stretch;
+  height: 36px;
+  flex-shrink: 0;
+}
+
+/* Window controls — fix 5: gap corrected to 8px (3×10 + 2×8 = 46px = frame width) */
+
+.mb-window-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.mb-dot {
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-radius: 10px;
+  border: 1px solid #15182814;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+.mb-dot--red {
+  background-color: #eb3441;
+}
+.mb-dot--orange {
+  background-color: #f4a43a;
+}
+.mb-dot--green {
+  background-color: #5acc5a;
+}
+
+/* Tab bar */
+
+.mb-tab-bar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+}
+
+.mb-tab {
+  display: flex;
+  overflow: clip;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  height: 36px;
+  padding: 10px 16px 10px 12px;
+  border-radius: 10px;
+  border: none;
+  background-color: #1518280a;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background-color 120ms ease;
+}
+
+.mb-tab:hover:not(.mb-tab--active) {
+  background-color: #15182814;
+}
+
+.mb-tab--active {
+  background-color: #ffffff;
+  box-shadow:
+    #15182814 0px 1px 2px,
+    #1518280a 0px 2px 6px;
+}
+
+/* fix 4: explicit Inter on tab label to override index.css root font */
+.mb-tab-label {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 13px;
+  line-height: 13px;
+  letter-spacing: -0.07px;
+  color: #4a4d5e;
+  font-weight: 500;
+  white-space: pre;
+  flex-shrink: 0;
+}
+
+/* ─── Browser window ────────────────────────────────────────────────────────── */
+
+.mb-browser-window {
+  display: flex;
+  overflow: clip;
+  flex-direction: column;
+  align-items: start;
+  align-self: stretch;
+  border-radius: 12px;
+  background-color: #ffffff;
+  box-shadow:
+    #15182814 0px 1px 2px,
+    #1518280a 0px 2px 6px;
+}
+
+/* ─── App list ──────────────────────────────────────────────────────────────── */
+
+.mb-app-list {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  align-self: stretch;
+}
+
+.mb-divider {
+  align-self: stretch;
+  height: 1px;
+  background-color: #15182814;
+  margin-inline: 4px;
+}
+
+/* ─── List item ─────────────────────────────────────────────────────────────── */
+
+.mb-list-item {
+  display: flex;
+  overflow: clip;
+  flex-direction: row;
+  align-items: center;
+  padding: 28px 24px;
+  gap: 16px;
+  align-self: stretch;
+  background-color: #ffffff;
+}
+
+.mb-list-item:not(.mb-list-item--disabled) {
+  cursor: pointer;
+}
+
+.mb-list-item--disabled {
+  cursor: not-allowed;
+}
+
+.mb-list-item:hover .mb-app-name {
+  color: #5c74ff;
+}
+
+/* fix 2: app-icon stretches to fill row height, content aligns top */
+.mb-app-icon {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+}
+
+/* App description */
+
+.mb-app-description {
+  display: flex;
+  overflow: clip;
+  flex-direction: column;
+  align-items: start;
+  gap: 4px;
+  flex: 1;
+}
+
+.mb-app-title {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 4px;
+  padding-block: 4px;
+  align-self: stretch;
+}
+
+.mb-app-name {
+  font-size: 14px;
+  line-height: 14px;
+  letter-spacing: -0.07px;
+  color: #151828;
+  font-weight: 550;
+  font-variation-settings: 'wght' 550;
+  white-space: pre-wrap;
+  transition: color 150ms ease;
+}
+
+.mb-app-subtitle {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.mb-rating {
+  font-size: 12px;
+  line-height: 14px;
+  letter-spacing: -0.07px;
+  color: #686c7f;
+  font-weight: 450;
+  font-variation-settings: 'wght' 450;
+  white-space: pre;
+  flex-shrink: 0;
+}
+
+.mb-meta {
+  font-size: 12px;
+  line-height: 14px;
+  letter-spacing: -0.07px;
+  color: #686c7f;
+  font-weight: 450;
+  font-variation-settings: 'wght' 450;
+  white-space: pre;
+  flex-shrink: 0;
+}
+
+.mb-badge {
+  display: flex;
+  flex-shrink: 0;
+}
+
+/* ─── Install button — primary ──────────────────────────────────────────────── */
+
+.mb-btn-wrapper {
+  padding: 1px;
+  border-radius: 24px;
+  background-color: #f2f4ff;
+  background-image: conic-gradient(
+    in oklab from var(--border-angle) at 50% 50%,
+    oklab(64.9% 0.009 -0.187 / 0%) 75.22%,
+    oklab(64.9% 0.009 -0.187) 100%
+  );
+  flex-shrink: 0;
+  animation: border-spin 2s linear infinite;
+  transition: background-color 150ms ease;
+}
+
+.mb-btn-inner {
+  display: flex;
+  overflow: clip;
+  flex-direction: row;
+  align-items: center;
+  padding: 10px 24px;
+  border-radius: 24px;
+  background-color: #f2f4ff;
+  text-decoration: none;
+  transition: background-color 150ms ease;
+}
+
+/* Hover darkens the button — direct button hover only */
+.mb-btn-wrapper:hover {
+  background-color: #e8ecff;
+}
+
+.mb-btn-wrapper:hover .mb-btn-inner {
+  background-color: #e8ecff;
+}
+
+/* Pressed state */
+.mb-btn-wrapper:hover .mb-btn-inner:active {
+  background-color: #dee3ff;
+}
+
+.mb-btn-wrapper:has(.mb-btn-inner:active) {
+  background-color: #dee3ff;
+}
+
+@keyframes border-spin {
+  to {
+    --border-angle: 360deg;
+  }
+}
+
+.mb-btn-label {
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: -0.1px;
+  color: #5c74ff;
+  font-weight: 600;
+  white-space: pre;
+  flex-shrink: 0;
+}
+
+/* ─── Install button — secondary (Yotpo disabled) ───────────────────────────── */
+
+/* fix 1: secondary button uses #F4F4F6, no gradient, 50% opacity */
+.mb-btn-wrapper--secondary {
+  background-color: #f4f4f6;
+  background-image: none;
+  animation: none;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.mb-btn-inner--secondary {
+  background-color: #f4f4f6;
+}
+
+.mb-btn-label--secondary {
+  color: #4a4d5e;
+}
