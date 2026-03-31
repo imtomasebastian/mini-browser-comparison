@@ -1,5 +1,6 @@
 import { Fragment, useState } from 'react'
 import './MiniBrowser.css'
+import { CometBorder } from './CometBorder.jsx'
 
 // ─── Icons ───────────────────────────────────────────────────────────────────
 
@@ -235,6 +236,7 @@ function InstallButton({ href }) {
 
   return (
     <div className="mb-btn-wrapper">
+      <CometBorder />
       <a
         className="mb-btn-inner"
         href={href}
