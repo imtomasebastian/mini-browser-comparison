@@ -212,14 +212,44 @@ function ChevronDownIcon() {
   )
 }
 
+function CloseIcon() {
+  return (
+    <svg width="5" height="5" viewBox="0 0 5 5" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M4.138 0.147C4.333 -0.048 4.649 -0.049 4.845 0.146C5.04 0.341 5.041 0.658 4.846 0.854L3.204 2.497L4.854 4.146C5.049 4.342 5.049 4.658 4.854 4.854C4.658 5.049 4.342 5.049 4.146 4.854L2.498 3.205L0.854 4.853C0.659 5.048 0.342 5.049 0.146 4.854C-0.049 4.659 -0.048 4.343 0.146 4.147L1.791 2.498L0.146 0.854C-0.049 0.658 -0.049 0.342 0.146 0.146C0.342 -0.049 0.658 -0.049 0.854 0.146L2.497 1.79L4.138 0.147Z" fill="currentColor" />
+    </svg>
+  )
+}
+
+function MinimizeIcon() {
+  return (
+    <svg width="6" height="1" viewBox="0 0 6 1" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M5.5 0C5.776 0 6 0.224 6 0.5C6 0.776 5.776 1 5.5 1H0.5C0.224 1 0 0.776 0 0.5C0 0.224 0.224 0 0.5 0H5.5Z" fill="currentColor" />
+    </svg>
+  )
+}
+
+function FullscreenIcon() {
+  return (
+    <svg width="5" height="5" viewBox="0 0 5 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0.707031 5H4C4.55228 5 5 4.55228 5 4V0.707031L0.707031 5ZM1 0C0.447715 0 8.05325e-09 0.447715 0 1V4.29297L4.29297 0H1Z" fill="currentColor"/>
+    </svg>
+  )
+}
+
 // ─── Sub-components ───────────────────────────────────────────────────────────
 
 function WindowControls() {
   return (
-    <div className="mb-window-controls" aria-hidden="true">
-      <span className="mb-dot mb-dot--red" />
-      <span className="mb-dot mb-dot--orange" />
-      <span className="mb-dot mb-dot--green" />
+    <div className="mb-window-controls">
+      <button className="mb-dot mb-dot--red" aria-label="Close" onClick={() => {}}>
+        <span className="mb-dot-icon"><CloseIcon /></span>
+      </button>
+      <button className="mb-dot mb-dot--orange" aria-label="Minimize" onClick={() => {}}>
+        <span className="mb-dot-icon"><MinimizeIcon /></span>
+      </button>
+      <button className="mb-dot mb-dot--green" aria-label="Fullscreen" onClick={() => {}}>
+        <span className="mb-dot-icon"><FullscreenIcon /></span>
+      </button>
     </div>
   )
 }

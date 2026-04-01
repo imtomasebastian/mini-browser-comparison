@@ -38,23 +38,71 @@
 }
 
 .mb-dot {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 10px;
   height: 10px;
   border-radius: 10px;
   border: 1px solid #15182814;
   box-sizing: border-box;
   flex-shrink: 0;
+  padding: 0;
+  cursor: default;
+  transition:
+    background-color 120ms ease,
+    color 120ms ease;
 }
 
+.mb-dot-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 120ms ease;
+  pointer-events: none;
+}
+
+/* ── Default ── */
 .mb-dot--red {
   background-color: #eb3441;
+  color: #74060e;
 }
 .mb-dot--orange {
   background-color: #f4a43a;
+  color: #9c6011;
 }
 .mb-dot--green {
   background-color: #5acc5a;
+  color: #2d7c2d;
+}
+
+/* ── Hover (group): all 3 respond when parent is hovered ── */
+.mb-window-controls:hover .mb-dot--red {
+  background-color: #ff6671;
+}
+.mb-window-controls:hover .mb-dot--orange {
+  background-color: #febb62;
+}
+.mb-window-controls:hover .mb-dot--green {
+  background-color: #74dc74;
+}
+.mb-window-controls:hover .mb-dot-icon {
+  opacity: 1;
+}
+
+/* ── Pressed (individual) — scoped under hover parent to win specificity ── */
+.mb-window-controls:hover .mb-dot--red:active {
+  background-color: #CC303B;
+  color: #57040A;
+}
+.mb-window-controls:hover .mb-dot--orange:active {
+  background-color: #DD8919;
+  color: #73460C;
+}
+.mb-window-controls:hover .mb-dot--green:active {
+  background-color: #41A741;
+  color: #1B4B1B;
 }
 
 /* Tab bar */
