@@ -13,6 +13,7 @@
   font-family: 'Inter', system-ui, sans-serif;
   font-synthesis: none;
   -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
 }
 
 /* ─── Browser bar ───────────────────────────────────────────────────────────── */
@@ -49,6 +50,8 @@
   flex-shrink: 0;
   padding: 0;
   cursor: default;
+  appearance: none;
+  -webkit-appearance: none;
   transition:
     background-color 120ms ease,
     color 120ms ease;
@@ -93,16 +96,16 @@
 
 /* ── Pressed (individual) — scoped under hover parent to win specificity ── */
 .mb-window-controls:hover .mb-dot--red:active {
-  background-color: #CC303B;
-  color: #57040A;
+  background-color: #cc303b;
+  color: #57040a;
 }
 .mb-window-controls:hover .mb-dot--orange:active {
-  background-color: #DD8919;
-  color: #73460C;
+  background-color: #dd8919;
+  color: #73460c;
 }
 .mb-window-controls:hover .mb-dot--green:active {
-  background-color: #41A741;
-  color: #1B4B1B;
+  background-color: #41a741;
+  color: #1b4b1b;
 }
 
 /* Tab bar */
@@ -112,6 +115,11 @@
   align-items: center;
   gap: 4px;
   flex: 1;
+  min-width: 0;
+}
+
+.mb-browser-bar > svg {
+  flex-shrink: 0;
 }
 
 .mb-tab {
@@ -139,6 +147,24 @@
   box-shadow:
     #15182814 0px 1px 2px,
     #1518280a 0px 2px 6px;
+  flex-shrink: 0;
+}
+
+.mb-tab:not(.mb-tab--active) {
+  flex-shrink: 1;
+  min-width: 0;
+}
+
+.mb-tab svg {
+  flex-shrink: 0;
+}
+
+.mb-tab:not(.mb-tab--active) .mb-tab-label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+  flex-shrink: 1;
 }
 
 /* fix 4: explicit Inter on tab label to override index.css root font */
@@ -209,13 +235,13 @@
   color: #5c74ff;
 }
 
-/* fix 2: app-icon stretches to fill row height, content aligns top */
 .mb-app-icon {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  align-self: stretch;
   flex-shrink: 0;
+  overflow: hidden;
+  align-self: flex-start;
 }
 
 /* App description */
@@ -227,6 +253,7 @@
   align-items: start;
   gap: 4px;
   flex: 1;
+  min-width: 0;
 }
 
 .mb-app-title {
@@ -236,23 +263,30 @@
   gap: 4px;
   padding-block: 4px;
   align-self: stretch;
+  overflow: hidden;
 }
 
 .mb-app-name {
+  display: block;
   font-size: 14px;
   line-height: 14px;
   letter-spacing: -0.07px;
   color: #151828;
   font-weight: 550;
   font-variation-settings: 'wght' 550;
-  white-space: pre-wrap;
   transition: color 150ms ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
 }
 
 .mb-app-subtitle {
   display: flex;
   align-items: center;
   gap: 3px;
+  overflow: hidden;
+  min-width: 0;
 }
 
 .mb-rating {
@@ -262,7 +296,7 @@
   color: #686c7f;
   font-weight: 450;
   font-variation-settings: 'wght' 450;
-  white-space: pre;
+  white-space: nowrap;
   flex-shrink: 0;
 }
 
@@ -273,8 +307,11 @@
   color: #686c7f;
   font-weight: 450;
   font-variation-settings: 'wght' 450;
-  white-space: pre;
-  flex-shrink: 0;
+  white-space: nowrap;
+  flex-shrink: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .mb-badge {
@@ -295,7 +332,10 @@
 
 .mb-btn-comet {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   overflow: visible;
   pointer-events: none;
 }

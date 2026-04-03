@@ -9,13 +9,13 @@ const P = 220
 // 7 segments totalling 48px: faintest tail → brightest head
 // Each segment's dashOffset = [startOffset, startOffset - P]
 const SEGMENTS = [
-  { len: 6,  startOffset: 42, opacity: 0.04 },
-  { len: 6,  startOffset: 36, opacity: 0.10 },
-  { len: 7,  startOffset: 29, opacity: 0.22 },
-  { len: 8,  startOffset: 21, opacity: 0.38 },
-  { len: 8,  startOffset: 13, opacity: 0.57 },
-  { len: 8,  startOffset: 5,  opacity: 0.78 },
-  { len: 5,  startOffset: 0,  opacity: 1.00, cap: 'round' as const },
+  { len: 6, startOffset: 42, opacity: 0.04 },
+  { len: 6, startOffset: 36, opacity: 0.1 },
+  { len: 7, startOffset: 29, opacity: 0.22 },
+  { len: 8, startOffset: 21, opacity: 0.38 },
+  { len: 8, startOffset: 13, opacity: 0.57 },
+  { len: 8, startOffset: 5, opacity: 0.78 },
+  { len: 5, startOffset: 0, opacity: 1.0, cap: 'round' as const },
 ]
 
 interface SegmentProps {
@@ -42,6 +42,7 @@ function Segment({ progress, len, startOffset, opacity, cap = 'butt' }: SegmentP
       strokeDasharray={`${len} ${P - len}`}
       style={{ strokeDashoffset: dashOffset }}
       opacity={opacity}
+      vectorEffect="non-scaling-stroke"
     />
   )
 }
@@ -61,9 +62,8 @@ export function CometBorder() {
   return (
     <MotionSvg
       className="mb-btn-comet"
-      width="90"
-      height="38"
       viewBox="0 0 90 38"
+      preserveAspectRatio="none"
       aria-hidden="true"
       focusable="false"
     >

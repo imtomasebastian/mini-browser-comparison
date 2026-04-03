@@ -1,0 +1,153 @@
+- generic [ref=e1]:
+  - main [ref=e3]:
+    - application "Browser comparison" [ref=e4]:
+      - generic [ref=e5]:
+        - generic [ref=e6]:
+          - button "Close" [ref=e7]:
+            - generic:
+              - img
+          - button "Minimize" [ref=e8]:
+            - generic:
+              - img
+          - button "Expand" [active] [ref=e78]:
+            - generic:
+              - img
+        - tablist "Review platforms" [ref=e10]:
+          - tab "Shopify App Store" [selected] [ref=e11] [cursor=pointer]:
+            - img [ref=e12]
+            - generic [ref=e16]: Shopify App Store
+          - tab "G2 Software Reviews" [ref=e17] [cursor=pointer]:
+            - img [ref=e18]
+            - generic [ref=e23]: G2 Software Reviews
+      - tabpanel [ref=e26]:
+        - generic [ref=e28] [cursor=pointer]:
+          - img [ref=e30]
+          - generic [ref=e33]:
+            - generic [ref=e34]:
+              - generic [ref=e35]: "Smile: Loyalty Program Rewards"
+              - generic [ref=e36]:
+                - generic [ref=e37]: "4.9"
+                - img [ref=e38]
+                - generic [ref=e40]: (4,126) • Free to install • Free trial available
+            - img "Built for Shopify" [ref=e42]
+          - generic [ref=e52]:
+            - img
+            - link "Install" [ref=e53]:
+              - /url: https://apps.shopify.com/smile-io
+              - generic [ref=e54]: Install
+  - button "MCP Connected v3.0.2 Output Detail Standard React Components Hide Until Restart Marker Color Clear on copy/send Block page interactions Manage MCP & Webhooks Manage MCP & Webhooks MCP Connection Connected MCP connection allows agents to receive and act on annotations. Learn more Webhooks Auto-Send The webhook URL will receive live annotation changes and annotation data." [ref=e77] [cursor=pointer]:
+    - img [ref=e74]
+    - generic:
+      - generic:
+        - button:
+          - img
+      - generic:
+        - button:
+          - img
+      - generic:
+        - button [disabled]:
+          - img
+      - generic:
+        - button [disabled]:
+          - img
+      - generic:
+        - button [disabled]:
+          - img
+      - generic:
+        - button [disabled]:
+          - img
+      - generic:
+        - button:
+          - img
+        - generic "MCP Connected"
+      - generic:
+        - button:
+          - img
+    - generic:
+      - generic:
+        - generic:
+          - generic:
+            - link:
+              - /url: https://agentation.com
+              - img
+            - paragraph: v3.0.2
+            - button "Switch to light mode":
+              - generic:
+                - generic:
+                  - img
+          - generic:
+            - generic:
+              - generic:
+                - text: Output Detail
+                - generic:
+                  - img
+              - button "Standard":
+                - generic: Standard
+            - generic:
+              - generic:
+                - text: React Components
+                - generic:
+                  - img
+              - generic:
+                - checkbox [checked]
+            - generic:
+              - generic:
+                - text: Hide Until Restart
+                - generic:
+                  - img
+              - generic:
+                - checkbox
+          - generic:
+            - generic: Marker Color
+            - generic:
+              - button "Indigo"
+              - button "Blue"
+              - button "Cyan"
+              - button "Green"
+              - button "Yellow"
+              - button "Orange"
+              - button "Red"
+          - generic:
+            - generic:
+              - generic:
+                - checkbox "Clear on copy/send"
+                - img
+              - generic: Clear on copy/send
+              - generic:
+                - img
+            - generic:
+              - generic:
+                - checkbox "Block page interactions" [checked]
+                - img
+              - generic: Block page interactions
+          - button "Manage MCP & Webhooks":
+            - generic: Manage MCP & Webhooks
+            - generic:
+              - img
+        - generic:
+          - button "Manage MCP & Webhooks":
+            - img
+            - generic: Manage MCP & Webhooks
+          - generic:
+            - generic:
+              - generic:
+                - text: MCP Connection
+                - generic:
+                  - img
+              - generic "Connected"
+            - paragraph:
+              - text: MCP connection allows agents to receive and act on annotations.
+              - link "Learn more":
+                - /url: https://agentation.dev/mcp
+          - generic:
+            - generic:
+              - generic:
+                - text: Webhooks
+                - generic:
+                  - img
+              - generic:
+                - generic: Auto-Send
+                - generic:
+                  - checkbox "Auto-Send" [checked] [disabled]
+            - paragraph: The webhook URL will receive live annotation changes and annotation data.
+            - textbox "Webhook URL"

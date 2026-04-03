@@ -1,6 +1,9 @@
-import { Fragment, useState } from 'react'
+import { useState } from 'react'
+import { motion } from 'motion/react'
 import './MiniBrowser.css'
 import { CometBorder } from './CometBorder'
+
+const SPRING = { type: 'spring', duration: 0.5, bounce: 0.15 } as const
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -86,8 +89,8 @@ function G2Icon() {
 function SmileAppIcon() {
   return (
     <svg
-      width="56"
-      height="56"
+      width="100%"
+      height="100%"
       viewBox="0 0 56 56"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -107,8 +110,8 @@ function SmileAppIcon() {
 function YotpoAppIcon() {
   return (
     <svg
-      width="56"
-      height="56"
+      width="100%"
+      height="100%"
       viewBox="0 0 56 56"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -214,16 +217,36 @@ function ChevronDownIcon() {
 
 function CloseIcon() {
   return (
-    <svg width="5" height="5" viewBox="0 0 5 5" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <path d="M4.138 0.147C4.333 -0.048 4.649 -0.049 4.845 0.146C5.04 0.341 5.041 0.658 4.846 0.854L3.204 2.497L4.854 4.146C5.049 4.342 5.049 4.658 4.854 4.854C4.658 5.049 4.342 5.049 4.146 4.854L2.498 3.205L0.854 4.853C0.659 5.048 0.342 5.049 0.146 4.854C-0.049 4.659 -0.048 4.343 0.146 4.147L1.791 2.498L0.146 0.854C-0.049 0.658 -0.049 0.342 0.146 0.146C0.342 -0.049 0.658 -0.049 0.854 0.146L2.497 1.79L4.138 0.147Z" fill="currentColor" />
+    <svg
+      width="5"
+      height="5"
+      viewBox="0 0 5 5"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <path
+        d="M4.138 0.147C4.333 -0.048 4.649 -0.049 4.845 0.146C5.04 0.341 5.041 0.658 4.846 0.854L3.204 2.497L4.854 4.146C5.049 4.342 5.049 4.658 4.854 4.854C4.658 5.049 4.342 5.049 4.146 4.854L2.498 3.205L0.854 4.853C0.659 5.048 0.342 5.049 0.146 4.854C-0.049 4.659 -0.048 4.343 0.146 4.147L1.791 2.498L0.146 0.854C-0.049 0.658 -0.049 0.342 0.146 0.146C0.342 -0.049 0.658 -0.049 0.854 0.146L2.497 1.79L4.138 0.147Z"
+        fill="currentColor"
+      />
     </svg>
   )
 }
 
 function MinimizeIcon() {
   return (
-    <svg width="6" height="1" viewBox="0 0 6 1" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <path d="M5.5 0C5.776 0 6 0.224 6 0.5C6 0.776 5.776 1 5.5 1H0.5C0.224 1 0 0.776 0 0.5C0 0.224 0.224 0 0.5 0H5.5Z" fill="currentColor" />
+    <svg
+      width="6"
+      height="1"
+      viewBox="0 0 6 1"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <path
+        d="M5.5 0C5.776 0 6 0.224 6 0.5C6 0.776 5.776 1 5.5 1H0.5C0.224 1 0 0.776 0 0.5C0 0.224 0.224 0 0.5 0H5.5Z"
+        fill="currentColor"
+      />
     </svg>
   )
 }
@@ -231,24 +254,51 @@ function MinimizeIcon() {
 function FullscreenIcon() {
   return (
     <svg width="5" height="5" viewBox="0 0 5 5" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0.707031 5H4C4.55228 5 5 4.55228 5 4V0.707031L0.707031 5ZM1 0C0.447715 0 8.05325e-09 0.447715 0 1V4.29297L4.29297 0H1Z" fill="currentColor"/>
+      <path
+        d="M0.707031 5H4C4.55228 5 5 4.55228 5 4V0.707031L0.707031 5ZM1 0C0.447715 0 8.05325e-09 0.447715 0 1V4.29297L4.29297 0H1Z"
+        fill="currentColor"
+      />
+    </svg>
+  )
+}
+
+function CollapseIcon() {
+  return (
+    <svg
+      width="7"
+      height="7"
+      viewBox="0 0 7 7"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <path d="M7 3.5H4.5C3.948 3.5 3.5 3.948 3.5 4.5V7L7 3.5Z" fill="currentColor" />
+      <path d="M0 3.5L3.5 0V2.5C3.5 3.052 3.052 3.5 2.5 3.5H0Z" fill="currentColor" />
     </svg>
   )
 }
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
 
-function WindowControls() {
+function WindowControls({ collapsed, onToggle }: { collapsed: boolean; onToggle: () => void }) {
   return (
     <div className="mb-window-controls">
       <button className="mb-dot mb-dot--red" aria-label="Close" onClick={() => {}}>
-        <span className="mb-dot-icon"><CloseIcon /></span>
+        <span className="mb-dot-icon">
+          <CloseIcon />
+        </span>
       </button>
       <button className="mb-dot mb-dot--orange" aria-label="Minimize" onClick={() => {}}>
-        <span className="mb-dot-icon"><MinimizeIcon /></span>
+        <span className="mb-dot-icon">
+          <MinimizeIcon />
+        </span>
       </button>
-      <button className="mb-dot mb-dot--green" aria-label="Fullscreen" onClick={() => {}}>
-        <span className="mb-dot-icon"><FullscreenIcon /></span>
+      <button
+        className="mb-dot mb-dot--green"
+        aria-label={collapsed ? 'Expand' : 'Collapse'}
+        onClick={onToggle}
+      >
+        <span className="mb-dot-icon">{collapsed ? <FullscreenIcon /> : <CollapseIcon />}</span>
       </button>
     </div>
   )
@@ -273,7 +323,7 @@ function Tab({ tab, isActive, onClick }: { tab: TabItem; isActive: boolean; onCl
   )
 }
 
-function InstallButton({ href }: { href: string | null }) {
+function InstallButton({ href, collapsed = false }: { href: string | null; collapsed?: boolean }) {
   if (!href) {
     return (
       <div className="mb-btn-wrapper mb-btn-wrapper--secondary" aria-disabled="true">
@@ -287,23 +337,43 @@ function InstallButton({ href }: { href: string | null }) {
   return (
     <div className="mb-btn-wrapper">
       <CometBorder />
-      <a
+      <motion.a
         className="mb-btn-inner"
         href={href}
         target="_blank"
         rel="noopener noreferrer"
         onClick={(e) => e.stopPropagation()}
+        initial={false}
+        animate={{ paddingLeft: collapsed ? 16 : 24, paddingRight: collapsed ? 16 : 24 }}
+        transition={SPRING}
       >
         <span className="mb-btn-label">Install</span>
-      </a>
+      </motion.a>
     </div>
   )
 }
 
-function ListItem({ app }: { app: AppItem }) {
+function ListItem({ app, collapsed = false }: { app: AppItem; collapsed?: boolean }) {
   return (
-    <div className={`mb-list-item${app.disabled ? ' mb-list-item--disabled' : ''}`}>
-      <div className="mb-app-icon">{app.icon}</div>
+    <motion.div
+      className={`mb-list-item${app.disabled ? ' mb-list-item--disabled' : ''}`}
+      initial={false}
+      animate={{
+        paddingTop: collapsed ? 20 : 28,
+        paddingBottom: collapsed ? 20 : 28,
+        paddingLeft: collapsed ? 20 : 24,
+        paddingRight: collapsed ? 20 : 24,
+      }}
+      transition={SPRING}
+    >
+      <motion.div
+        className="mb-app-icon"
+        initial={false}
+        animate={{ width: collapsed ? 44 : 56, height: collapsed ? 44 : 56 }}
+        transition={SPRING}
+      >
+        {app.icon}
+      </motion.div>
       <div className="mb-app-description">
         <div className="mb-app-title">
           <span className="mb-app-name">{app.name}</span>
@@ -317,8 +387,8 @@ function ListItem({ app }: { app: AppItem }) {
         </div>
         {app.badge && <div className="mb-badge">{app.badge}</div>}
       </div>
-      <InstallButton href={app.disabled ? null : app.installUrl} />
-    </div>
+      <InstallButton href={app.disabled ? null : app.installUrl} collapsed={collapsed} />
+    </motion.div>
   )
 }
 
@@ -351,12 +421,20 @@ const APPS: AppItem[] = [
 
 export function MiniBrowser() {
   const [activeTab, setActiveTab] = useState('shopify')
+  const [collapsed, setCollapsed] = useState(false)
 
   return (
-    <div className="mini-browser" role="application" aria-label="Browser comparison">
+    <motion.div
+      className="mini-browser"
+      role="application"
+      aria-label="Browser comparison"
+      initial={false}
+      animate={{ width: collapsed ? 386 : 552 }}
+      transition={SPRING}
+    >
       {/* Browser bar */}
       <div className="mb-browser-bar">
-        <WindowControls />
+        <WindowControls collapsed={collapsed} onToggle={() => setCollapsed((c) => !c)} />
         <div className="mb-tab-bar" role="tablist" aria-label="Review platforms">
           {TABS.map((tab) => (
             <Tab
@@ -373,14 +451,20 @@ export function MiniBrowser() {
       {/* Browser window */}
       <div className="mb-browser-window" role="tabpanel">
         <div className="mb-app-list">
-          {APPS.map((app, i) => (
-            <Fragment key={app.id}>
-              {i > 0 && <div className="mb-divider" aria-hidden="true" />}
-              <ListItem app={app} />
-            </Fragment>
-          ))}
+          <ListItem app={APPS[0]} collapsed={collapsed} />
+          <motion.div
+            initial={false}
+            animate={{ height: collapsed ? 0 : 'auto', opacity: collapsed ? 0 : 1 }}
+            transition={{ height: SPRING, opacity: { duration: 0.15, ease: 'easeOut' } }}
+            style={{ overflow: 'hidden', alignSelf: 'stretch' }}
+          >
+            <motion.div initial={false} animate={{ y: collapsed ? 80 : 0 }} transition={SPRING}>
+              <div className="mb-divider" aria-hidden="true" />
+              <ListItem app={APPS[1]} />
+            </motion.div>
+          </motion.div>
         </div>
       </div>
-    </div>
+    </motion.div>
   )
 }
