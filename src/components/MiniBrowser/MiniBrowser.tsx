@@ -1,9 +1,15 @@
 import { useState } from 'react'
 import { motion } from 'motion/react'
+import { useDialKit } from 'dialkit'
 import './MiniBrowser.css'
 import { CometBorder } from './CometBorder'
 
-const SPRING = { type: 'spring', duration: 0.5, bounce: 0.15 } as const
+// ─── Dimensions ───────────────────────────────────────────────────────────────
+
+const DIMENSIONS = {
+  collapsed: { width: 386, height: 156 },
+  expanded: { width: 552, height: 285 },
+} as const
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -217,16 +223,9 @@ function ChevronDownIcon() {
 
 function CloseIcon() {
   return (
-    <svg
-      width="5"
-      height="5"
-      viewBox="0 0 5 5"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-    >
+    <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
-        d="M4.138 0.147C4.333 -0.048 4.649 -0.049 4.845 0.146C5.04 0.341 5.041 0.658 4.846 0.854L3.204 2.497L4.854 4.146C5.049 4.342 5.049 4.658 4.854 4.854C4.658 5.049 4.342 5.049 4.146 4.854L2.498 3.205L0.854 4.853C0.659 5.048 0.342 5.049 0.146 4.854C-0.049 4.659 -0.048 4.343 0.146 4.147L1.791 2.498L0.146 0.854C-0.049 0.658 -0.049 0.342 0.146 0.146C0.342 -0.049 0.658 -0.049 0.854 0.146L2.497 1.79L4.138 0.147Z"
+        d="M5.64645 1.64645C5.84173 1.45145 6.1583 1.45127 6.35348 1.64645C6.54862 1.84162 6.54847 2.15821 6.35348 2.35348L4.70992 3.99606L6.36031 5.64645C6.55531 5.84173 6.55549 6.1583 6.36031 6.35348C6.16514 6.54865 5.84857 6.54848 5.65328 6.35348L4.00289 4.70309L2.35348 6.35348C2.15823 6.54873 1.84171 6.5487 1.64645 6.35348C1.45118 6.15822 1.45118 5.84171 1.64645 5.64645L3.29586 3.99606L1.65328 2.35348C1.45802 2.15822 1.45802 1.84171 1.65328 1.64645C1.84854 1.45118 2.16505 1.45118 2.36031 1.64645L4.00289 3.28902L5.64645 1.64645Z"
         fill="currentColor"
       />
     </svg>
@@ -235,16 +234,9 @@ function CloseIcon() {
 
 function MinimizeIcon() {
   return (
-    <svg
-      width="6"
-      height="1"
-      viewBox="0 0 6 1"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-    >
+    <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
-        d="M5.5 0C5.776 0 6 0.224 6 0.5C6 0.776 5.776 1 5.5 1H0.5C0.224 1 0 0.776 0 0.5C0 0.224 0.224 0 0.5 0H5.5Z"
+        d="M6.5 3.5C6.77614 3.5 7 3.72386 7 4C7 4.27614 6.77614 4.5 6.5 4.5H1.5C1.22386 4.5 1 4.27614 1 4C1 3.72386 1.22386 3.5 1.5 3.5H6.5Z"
         fill="currentColor"
       />
     </svg>
@@ -253,11 +245,12 @@ function MinimizeIcon() {
 
 function FullscreenIcon() {
   return (
-    <svg width="5" height="5" viewBox="0 0 5 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
-        d="M0.707031 5H4C4.55228 5 5 4.55228 5 4V0.707031L0.707031 5ZM1 0C0.447715 0 8.05325e-09 0.447715 0 1V4.29297L4.29297 0H1Z"
+        d="M2.20703 6.50003H5.50003C6.05203 6.50003 6.50003 6.05203 6.50003 5.50003V2.20703L2.20703 6.50003Z"
         fill="currentColor"
       />
+      <path d="M2.5 1.5C1.948 1.5 1.5 1.948 1.5 2.5V5.793L5.793 1.5H2.5Z" fill="currentColor" />
     </svg>
   )
 }
@@ -265,15 +258,15 @@ function FullscreenIcon() {
 function CollapseIcon() {
   return (
     <svg
-      width="7"
-      height="7"
-      viewBox="0 0 7 7"
+      width="8"
+      height="8"
+      viewBox="0 0 8 8"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden="true"
     >
-      <path d="M7 3.5H4.5C3.948 3.5 3.5 3.948 3.5 4.5V7L7 3.5Z" fill="currentColor" />
-      <path d="M0 3.5L3.5 0V2.5C3.5 3.052 3.052 3.5 2.5 3.5H0Z" fill="currentColor" />
+      <path d="M7.5 4L4 7.5V5C4 4.44772 4.44772 4 5 4H7.5Z" fill="currentColor" />
+      <path d="M4 3C4 3.55228 3.55228 4 3 4H0.5L4 0.5V3Z" fill="currentColor" />
     </svg>
   )
 }
@@ -323,7 +316,16 @@ function Tab({ tab, isActive, onClick }: { tab: TabItem; isActive: boolean; onCl
   )
 }
 
-function InstallButton({ href, collapsed = false }: { href: string | null; collapsed?: boolean }) {
+function InstallButton({
+  href,
+  collapsed = false,
+  spring,
+}: {
+  href: string | null
+  collapsed?: boolean
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  spring: any
+}) {
   if (!href) {
     return (
       <div className="mb-btn-wrapper mb-btn-wrapper--secondary" aria-disabled="true">
@@ -345,7 +347,7 @@ function InstallButton({ href, collapsed = false }: { href: string | null; colla
         onClick={(e) => e.stopPropagation()}
         initial={false}
         animate={{ paddingLeft: collapsed ? 16 : 24, paddingRight: collapsed ? 16 : 24 }}
-        transition={SPRING}
+        transition={spring}
       >
         <span className="mb-btn-label">Install</span>
       </motion.a>
@@ -353,24 +355,45 @@ function InstallButton({ href, collapsed = false }: { href: string | null; colla
   )
 }
 
-function ListItem({ app, collapsed = false }: { app: AppItem; collapsed?: boolean }) {
+function ListItem({
+  app,
+  collapsed = false,
+  spring,
+  iconSpring,
+  iconSize,
+  paddingCollapsed,
+  paddingExpanded,
+}: {
+  app: AppItem
+  collapsed?: boolean
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  spring: any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  iconSpring: any
+  iconSize: { collapsed: number; expanded: number }
+  paddingCollapsed: number
+  paddingExpanded: number
+}) {
   return (
     <motion.div
       className={`mb-list-item${app.disabled ? ' mb-list-item--disabled' : ''}`}
       initial={false}
       animate={{
-        paddingTop: collapsed ? 20 : 28,
-        paddingBottom: collapsed ? 20 : 28,
-        paddingLeft: collapsed ? 20 : 24,
-        paddingRight: collapsed ? 20 : 24,
+        paddingTop: collapsed ? paddingCollapsed : paddingExpanded,
+        paddingBottom: collapsed ? paddingCollapsed : paddingExpanded,
+        paddingLeft: collapsed ? paddingCollapsed : paddingExpanded,
+        paddingRight: collapsed ? paddingCollapsed : paddingExpanded,
       }}
-      transition={SPRING}
+      transition={spring}
     >
       <motion.div
         className="mb-app-icon"
         initial={false}
-        animate={{ width: collapsed ? 44 : 56, height: collapsed ? 44 : 56 }}
-        transition={SPRING}
+        animate={{
+          width: collapsed ? iconSize.collapsed : iconSize.expanded,
+          height: collapsed ? iconSize.collapsed : iconSize.expanded,
+        }}
+        transition={iconSpring}
       >
         {app.icon}
       </motion.div>
@@ -387,7 +410,11 @@ function ListItem({ app, collapsed = false }: { app: AppItem; collapsed?: boolea
         </div>
         {app.badge && <div className="mb-badge">{app.badge}</div>}
       </div>
-      <InstallButton href={app.disabled ? null : app.installUrl} collapsed={collapsed} />
+      <InstallButton
+        href={app.disabled ? null : app.installUrl}
+        collapsed={collapsed}
+        spring={spring}
+      />
     </motion.div>
   )
 }
@@ -423,14 +450,115 @@ export function MiniBrowser() {
   const [activeTab, setActiveTab] = useState('shopify')
   const [collapsed, setCollapsed] = useState(false)
 
+  const dims = collapsed ? DIMENSIONS.collapsed : DIMENSIONS.expanded
+  const dir = collapsed ? 'collapse' : 'expand'
+
+  const p = useDialKit('Mini Browser', {
+    layoutSpring: {
+      collapse: {
+        duration: [0.5, 0, 1] as [number, number, number],
+        bounce: [0.35, 0, 1] as [number, number, number],
+        delay: [0, 0, 1] as [number, number, number],
+      },
+      expand: {
+        duration: [0.65, 0, 1] as [number, number, number],
+        bounce: [0.35, 0, 1] as [number, number, number],
+        delay: [0, 0, 1] as [number, number, number],
+      },
+    },
+    secondRow: {
+      collapse: {
+        duration: [0.4, 0, 1] as [number, number, number],
+        bounce: [0, 0, 1] as [number, number, number],
+        yDelay: [0, 0, 1] as [number, number, number],
+        opacityDuration: [0.2, 0, 1] as [number, number, number],
+        opacityDelay: [0, 0, 1] as [number, number, number],
+        slideY: [30, 0, 200] as [number, number, number],
+      },
+      expand: {
+        duration: [0.4, 0, 1] as [number, number, number],
+        bounce: [0, 0, 1] as [number, number, number],
+        yDelay: [0, 0, 1] as [number, number, number],
+        opacityDuration: [0.25, 0, 1] as [number, number, number],
+        opacityDelay: [0.05, 0, 1] as [number, number, number],
+        slideY: [30, 0, 200] as [number, number, number],
+      },
+    },
+    divider: {
+      collapse: {
+        opacityDuration: [0.1, 0, 1] as [number, number, number],
+        opacityDelay: [0.05, 0, 1] as [number, number, number],
+      },
+      expand: {
+        opacityDuration: [0.1, 0, 1] as [number, number, number],
+        opacityDelay: [0.05, 0, 1] as [number, number, number],
+      },
+    },
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } as any) as any
+
+  const LAYOUT_SPRING = {
+    collapse: {
+      type: 'spring',
+      duration: p.layoutSpring.collapse.duration,
+      bounce: p.layoutSpring.collapse.bounce,
+      delay: p.layoutSpring.collapse.delay,
+    },
+    expand: {
+      type: 'spring',
+      duration: p.layoutSpring.expand.duration,
+      bounce: p.layoutSpring.expand.bounce,
+      delay: p.layoutSpring.expand.delay,
+    },
+  }
+
+  const SECOND_ROW = {
+    collapse: {
+      spring: {
+        type: 'spring',
+        duration: p.secondRow.collapse.duration,
+        bounce: p.secondRow.collapse.bounce,
+      },
+      yDelay: p.secondRow.collapse.yDelay,
+      opacityDuration: p.secondRow.collapse.opacityDuration,
+      opacityDelay: p.secondRow.collapse.opacityDelay,
+      slideY: p.secondRow.collapse.slideY,
+    },
+    expand: {
+      spring: {
+        type: 'spring',
+        duration: p.secondRow.expand.duration,
+        bounce: p.secondRow.expand.bounce,
+      },
+      yDelay: p.secondRow.expand.yDelay,
+      opacityDuration: p.secondRow.expand.opacityDuration,
+      opacityDelay: p.secondRow.expand.opacityDelay,
+      slideY: p.secondRow.expand.slideY,
+    },
+  }
+
+  const DIVIDER = {
+    collapse: {
+      opacityDuration: p.divider.collapse.opacityDuration,
+      opacityDelay: p.divider.collapse.opacityDelay,
+    },
+    expand: {
+      opacityDuration: p.divider.expand.opacityDuration,
+      opacityDelay: p.divider.expand.opacityDelay,
+    },
+  }
+
+  const rowSpring = LAYOUT_SPRING[dir]
+
   return (
     <motion.div
       className="mini-browser"
       role="application"
       aria-label="Browser comparison"
       initial={false}
-      animate={{ width: collapsed ? 386 : 552 }}
-      transition={SPRING}
+      animate={{ width: dims.width, height: dims.height }}
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      transition={{ width: rowSpring as any, height: rowSpring as any }}
     >
       {/* Browser bar */}
       <div className="mb-browser-bar">
@@ -451,17 +579,63 @@ export function MiniBrowser() {
       {/* Browser window */}
       <div className="mb-browser-window" role="tabpanel">
         <div className="mb-app-list">
-          <ListItem app={APPS[0]} collapsed={collapsed} />
+          <ListItem
+            app={APPS[0]}
+            collapsed={collapsed}
+            spring={rowSpring}
+            iconSpring={rowSpring}
+            iconSize={{ collapsed: 44, expanded: 56 }}
+            paddingCollapsed={20}
+            paddingExpanded={28}
+          />
+          <motion.div
+            className="mb-divider"
+            aria-hidden="true"
+            initial={false}
+            animate={{ opacity: collapsed ? 0 : 1 }}
+            transition={{
+              duration: DIVIDER[dir].opacityDuration,
+              delay: DIVIDER[dir].opacityDelay,
+              ease: 'easeOut',
+            }}
+          />
           <motion.div
             initial={false}
-            animate={{ height: collapsed ? 0 : 'auto', opacity: collapsed ? 0 : 1 }}
-            transition={{ height: SPRING, opacity: { duration: 0.15, ease: 'easeOut' } }}
-            style={{ overflow: 'hidden', alignSelf: 'stretch' }}
+            animate={{
+              y: collapsed ? SECOND_ROW.collapse.slideY : 0,
+              opacity: collapsed ? 0 : 1,
+            }}
+            transition={
+              collapsed
+                ? {
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    y: { ...SECOND_ROW.collapse.spring, delay: SECOND_ROW.collapse.yDelay } as any,
+                    opacity: {
+                      duration: SECOND_ROW.collapse.opacityDuration,
+                      delay: SECOND_ROW.collapse.opacityDelay,
+                      ease: 'easeOut',
+                    },
+                  }
+                : {
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    y: { ...SECOND_ROW.expand.spring, delay: SECOND_ROW.expand.yDelay } as any,
+                    opacity: {
+                      duration: SECOND_ROW.expand.opacityDuration,
+                      delay: SECOND_ROW.expand.opacityDelay,
+                      ease: 'easeOut',
+                    },
+                  }
+            }
+            style={{ alignSelf: 'stretch' }}
           >
-            <motion.div initial={false} animate={{ y: collapsed ? 80 : 0 }} transition={SPRING}>
-              <div className="mb-divider" aria-hidden="true" />
-              <ListItem app={APPS[1]} />
-            </motion.div>
+            <ListItem
+              app={APPS[1]}
+              spring={rowSpring}
+              iconSpring={rowSpring}
+              iconSize={{ collapsed: 44, expanded: 56 }}
+              paddingCollapsed={20}
+              paddingExpanded={28}
+            />
           </motion.div>
         </div>
       </div>

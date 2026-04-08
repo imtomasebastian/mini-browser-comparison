@@ -1,0 +1,21 @@
+{
+  "output": ".ai-codex",
+  "include": ["app", "src", "components", "lib", "utils", "prisma"],
+  "exclude": [
+    "node_modules",
+    ".next",
+    "dist",
+    "build",
+    "coverage",
+    "tests",
+    "__tests__",
+    "__mocks__",
+    "storybook-static",
+    ".turbo",
+    ".cache",
+    "public",
+    "assets",
+    "tmp"
+  ],
+  "schema": "prisma/schema.prisma"
+}

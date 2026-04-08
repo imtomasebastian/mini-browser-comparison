@@ -42,7 +42,6 @@ function Segment({ progress, len, startOffset, opacity, cap = 'butt' }: SegmentP
       strokeDasharray={`${len} ${P - len}`}
       style={{ strokeDashoffset: dashOffset }}
       opacity={opacity}
-      vectorEffect="non-scaling-stroke"
     />
   )
 }

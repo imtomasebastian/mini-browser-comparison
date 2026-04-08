@@ -187,6 +187,8 @@
   flex-direction: column;
   align-items: start;
   align-self: stretch;
+  flex: 1;
+  min-height: 0;
   border-radius: 12px;
   background-color: #ffffff;
   box-shadow:
@@ -201,11 +203,14 @@
   flex-direction: column;
   align-items: start;
   align-self: stretch;
+  flex: 1;
+  min-height: 0;
 }
 
 .mb-divider {
   align-self: stretch;
   height: 1px;
+  flex-shrink: 0;
   background-color: #15182814;
   margin-inline: 4px;
 }
@@ -259,7 +264,7 @@
 .mb-app-title {
   display: flex;
   flex-direction: column;
-  align-items: start;
+  align-items: stretch;
   gap: 4px;
   padding-block: 4px;
   align-self: stretch;
@@ -274,11 +279,10 @@
   color: #151828;
   font-weight: 550;
   font-variation-settings: 'wght' 550;
-  transition: color 150ms ease;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  width: 100%;
+  transition: color 150ms ease;
 }
 
 .mb-app-subtitle {
@@ -287,6 +291,10 @@
   gap: 3px;
   overflow: hidden;
   min-width: 0;
+}
+
+.mb-app-subtitle svg {
+  flex-shrink: 0;
 }
 
 .mb-rating {

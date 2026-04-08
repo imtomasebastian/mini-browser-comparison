@@ -2,9 +2,31 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Browser Automation
+
+Use `agent-browser` for web automation. Run `agent-browser --help` for all commands.
+
+Core workflow:
+
+1. `agent-browser open <url>` - Navigate to page
+2. `agent-browser snapshot -i` - Get interactive elements with refs (@e1, @e2)
+3. `agent-browser click @e1` / `fill @e2 "text"` - Interact using refs
+4. Re-snapshot after page changes
+
+## Codebase Index
+
+Pre-built index files are in `.ai-codex/`. Read these FIRST before exploring the codebase:
+
+- `.ai-codex/routes.md` -- all API routes
+- `.ai-codex/pages.md` -- page tree
+- `.ai-codex/lib.md` -- library exports
+- `.ai-codex/schema.md` -- database schema
+- `.ai-codex/components.md` -- component tree
+
 ## Project
 
 React component library built from Paper MCP designs. The main design frame in Paper is called **"mini-browser"**. Additional frames follow naming conventions:
+
 - `*-animation` — animation state references (use these when implementing motion/transitions)
 - `*-states` — component state references (use these for hover, active, disabled, etc. variants)
 
