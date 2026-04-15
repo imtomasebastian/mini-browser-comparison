@@ -624,7 +624,7 @@ export function MiniBrowser() {
                     },
                   }
             }
-            style={{ alignSelf: 'stretch' }}
+            className="mb-second-row"
           >
             <ListItem
               app={APPS[1]}

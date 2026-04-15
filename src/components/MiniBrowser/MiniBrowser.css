@@ -207,6 +207,10 @@
   min-height: 0;
 }
 
+.mb-second-row {
+  align-self: stretch;
+}
+
 .mb-divider {
   align-self: stretch;
   height: 1px;
