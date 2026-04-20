@@ -29,6 +29,11 @@ interface TabItem {
   id: string
   icon: React.ReactNode
   label: string
+  widths: {
+    expanded: number // used when active or expanded (default size)
+    collapsed: number // used only when inactive + collapsed
+    // add future states here, e.g. minimized: number
+  }
 }
 
 // ─── Icons ───────────────────────────────────────────────────────────────────
@@ -94,50 +99,43 @@ function G2Icon() {
 
 function SmileAppIcon() {
   return (
-    <svg
-      width="100%"
-      height="100%"
-      viewBox="0 0 56 56"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-    >
-      <rect width="56" height="56" rx="12" fill="#FCC419" />
-      <path
-        fillRule="evenodd"
-        clipRule="evenodd"
-        d="M35.774 23.333H34.411C34.14 23.333 33.907 23.43 33.711 23.627C33.533 23.805 33.421 24.016 33.415 24.256C33.411 24.403 33.39 25.263 33.342 25.806C33.194 27.382 32.672 28.649 31.775 29.608C30.885 30.561 29.627 31.039 28 31.047C26.371 31.04 25.112 30.561 24.221 29.608C23.325 28.649 22.802 27.382 22.654 25.806C22.606 25.263 22.585 24.403 22.581 24.256C22.575 24.016 22.463 23.805 22.285 23.627C22.089 23.43 21.856 23.333 21.585 23.333H20.222C19.951 23.333 19.718 23.43 19.521 23.627C19.343 23.805 19.227 23.982 19.227 24.292C19.227 24.292 19.275 25.707 19.3 25.99C19.521 28.501 20.387 30.5 21.899 31.989C23.397 33.464 25.42 34.208 27.968 34.221C28.008 34.222 28.018 34.222 28.029 34.222C30.577 34.208 32.6 33.464 34.097 31.989C35.609 30.5 36.475 28.501 36.696 25.99C36.722 25.707 36.77 24.292 36.77 24.292C36.77 23.982 36.653 23.805 36.476 23.627C36.279 23.43 36.046 23.333 35.774 23.333Z"
-        fill="#FFFFFF"
-      />
-    </svg>
+    <div className="mb-app-icon-shell" style={{ '--icon-color': '#FCC51F' } as React.CSSProperties}>
+      <svg
+        className="mb-app-icon-glyph"
+        viewBox="0 0 56 56"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
+      >
+        <path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M35.774 23.332H34.411C34.14 23.332 33.907 23.429 33.711 23.626C33.533 23.804 33.421 24.015 33.415 24.255C33.411 24.402 33.39 25.262 33.342 25.805C33.194 27.381 32.672 28.648 31.775 29.607C30.885 30.559 29.627 31.038 28 31.046C26.371 31.039 25.112 30.56 24.221 29.607C23.325 28.648 22.802 27.381 22.654 25.805C22.606 25.262 22.585 24.402 22.581 24.255C22.575 24.015 22.463 23.804 22.285 23.626C22.089 23.429 21.856 23.332 21.585 23.332H20.222C19.951 23.332 19.718 23.429 19.521 23.626C19.343 23.804 19.227 23.981 19.227 24.291C19.227 24.291 19.275 25.706 19.3 25.989C19.521 28.5 20.387 30.499 21.899 31.988C23.397 33.463 25.42 34.207 27.968 34.22C28.008 34.221 28.018 34.221 28.029 34.221C30.577 34.207 32.6 33.463 34.097 31.988C35.609 30.499 36.475 28.5 36.696 25.989C36.722 25.706 36.77 24.291 36.77 24.291C36.77 23.981 36.653 23.804 36.476 23.626C36.279 23.429 36.046 23.332 35.774 23.332Z"
+          fill="#FFFFFF"
+        />
+      </svg>
+    </div>
   )
 }
 
 function YotpoAppIcon() {
   return (
-    <svg
-      width="100%"
-      height="100%"
-      viewBox="0 0 56 56"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-    >
-      <defs>
-        <clipPath id="mb-yotpo-clip">
-          <rect width="38.844" height="11" fill="#fff" transform="translate(8.578 23)" />
-        </clipPath>
-      </defs>
-      <rect width="56" height="56" rx="12" fill="#0042E4" />
-      <g clipPath="url(#mb-yotpo-clip)">
+    <div className="mb-app-icon-shell" style={{ '--icon-color': '#0042E4' } as React.CSSProperties}>
+      <svg
+        className="mb-app-icon-glyph"
+        viewBox="0 0 56 56"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
+      >
         <path
           fillRule="evenodd"
           clipRule="evenodd"
-          d="M10.874 24.678L12.291 28.585L13.776 24.678H15.884L12.28 33.725H10.195L11.261 30.921L8.699 24.678H10.874ZM33.135 24.539C35.038 24.539 36.425 26.016 36.425 28.037C36.425 30.059 35.038 31.536 33.135 31.536C32.432 31.536 31.841 31.35 31.39 30.991L31.361 30.968L31.335 30.947V33.723H29.305V24.678H31.1V25.354L31.111 25.342C31.553 24.838 32.222 24.559 33.049 24.54L33.093 24.54L33.135 24.539ZM19.583 24.539C21.678 24.539 23.163 25.987 23.163 28.037C23.163 30.079 21.673 31.536 19.583 31.536C17.48 31.536 15.988 30.081 15.988 28.037C15.988 25.985 17.475 24.539 19.583 24.539ZM26.547 23.189V24.678H28.218V26.432H26.547V28.853C26.547 29.395 26.81 29.693 27.289 29.711L27.313 29.712L27.336 29.712C27.661 29.712 27.907 29.627 28.128 29.415L28.148 29.395L28.203 29.339H28.218V31.274L28.156 31.304C27.821 31.463 27.615 31.536 27.046 31.536C25.435 31.536 24.551 30.659 24.517 29.022L24.516 28.972V28.922L24.516 26.432H23.781V24.678H24.571V23.189H26.547ZM40.863 24.539C42.959 24.539 44.444 25.987 44.444 28.037C44.444 30.079 42.954 31.536 40.863 31.536C38.761 31.536 37.268 30.081 37.268 28.037C37.268 25.985 38.756 24.539 40.863 24.539ZM46.1 29.31C46.714 29.31 47.212 29.808 47.212 30.423C47.212 31.037 46.714 31.536 46.1 31.536C45.485 31.536 44.987 31.037 44.987 30.423C44.987 29.808 45.485 29.31 46.1 29.31ZM32.831 26.363C31.915 26.363 31.294 27.04 31.294 28.037C31.294 29.035 31.915 29.712 32.831 29.712C33.757 29.712 34.381 29.037 34.381 28.037C34.381 27.038 33.757 26.363 32.831 26.363ZM19.582 26.363C18.665 26.363 18.032 27.044 18.032 28.037C18.032 29.032 18.665 29.712 19.583 29.712C20.489 29.712 21.119 29.029 21.119 28.037C21.119 27.046 20.488 26.363 19.582 26.363ZM40.863 26.363C39.945 26.363 39.313 27.044 39.313 28.037C39.313 29.032 39.945 29.712 40.863 29.712C41.769 29.712 42.4 29.029 42.4 28.037C42.4 27.046 41.769 26.363 40.863 26.363Z"
+          d="M10.874 24.697L12.291 28.604L13.776 24.697H15.884L12.28 33.744H10.195L11.261 30.941L8.699 24.697H10.874ZM33.135 24.559C35.038 24.559 36.425 26.036 36.425 28.057C36.425 30.078 35.038 31.555 33.135 31.555C32.432 31.555 31.841 31.369 31.39 31.011L31.361 30.987L31.335 30.966V33.742H29.305V24.697H31.1V25.374L31.111 25.362C31.553 24.857 32.222 24.578 33.049 24.56L33.093 24.559L33.135 24.559ZM19.583 24.559C21.678 24.559 23.163 26.007 23.163 28.057C23.163 30.098 21.673 31.555 19.583 31.555C17.48 31.555 15.988 30.101 15.988 28.057C15.988 26.005 17.475 24.559 19.583 24.559ZM26.547 23.209V24.697H28.218V26.452H26.547V28.873C26.547 29.415 26.81 29.713 27.289 29.731L27.313 29.731L27.336 29.732C27.661 29.732 27.907 29.646 28.128 29.435L28.148 29.414L28.203 29.358H28.218V31.293L28.156 31.323C27.821 31.483 27.615 31.555 27.046 31.555C25.435 31.555 24.551 30.679 24.517 29.042L24.516 28.992V28.942L24.516 26.452H23.781V24.697H24.571V23.209H26.547ZM40.863 24.559C42.959 24.559 44.444 26.007 44.444 28.057C44.444 30.098 42.954 31.555 40.863 31.555C38.761 31.555 37.268 30.101 37.268 28.057C37.268 26.005 38.756 24.559 40.863 24.559ZM46.1 29.329C46.714 29.329 47.212 29.828 47.212 30.442C47.212 31.057 46.714 31.555 46.1 31.555C45.485 31.555 44.987 31.057 44.987 30.442C44.987 29.329 45.485 29.329 46.1 29.329ZM32.831 26.383C31.915 26.383 31.294 27.06 31.294 28.057C31.294 29.055 31.915 29.732 32.831 29.732C33.757 29.732 34.381 29.056 34.381 28.057C34.381 27.058 33.757 26.383 32.831 26.383ZM19.582 26.383C18.665 26.383 18.032 27.063 18.032 28.057C18.032 29.051 18.665 29.732 19.583 29.732C20.489 29.732 21.119 29.049 21.119 28.057C21.119 27.065 20.488 26.383 19.582 26.383ZM40.863 26.383C39.945 26.383 39.313 27.063 39.313 28.057C39.313 29.051 39.945 29.732 40.863 29.732C41.769 29.732 42.4 29.049 42.4 28.057C42.4 27.065 41.769 26.383 40.863 26.383Z"
           fill="#FFFFFF"
         />
-      </g>
-    </svg>
+      </svg>
+    </div>
   )
 }
 
@@ -296,21 +294,47 @@ function WindowControls({ collapsed, onToggle }: { collapsed: boolean; onToggle:
 }
 
 const TABS: TabItem[] = [
-  { id: 'shopify', icon: <ShopifyIcon />, label: 'Shopify App Store' },
-  { id: 'g2', icon: <G2Icon />, label: 'G2 Software Reviews' },
+  {
+    id: 'shopify',
+    icon: <ShopifyIcon />,
+    label: 'Shopify App Store',
+    widths: { expanded: 164 /* TODO */, collapsed: 69 /* TODO */ },
+  },
+  {
+    id: 'g2',
+    icon: <G2Icon />,
+    label: 'G2 Software Reviews',
+    widths: { expanded: 183 /* TODO */, collapsed: 88 /* TODO */ },
+  },
 ]
 
-function Tab({ tab, isActive, onClick }: { tab: TabItem; isActive: boolean; onClick: () => void }) {
+function Tab({
+  tab,
+  isActive,
+  onClick,
+  width,
+  tabSpring,
+}: {
+  tab: TabItem
+  isActive: boolean
+  onClick: () => void
+  width: number
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  tabSpring: any
+}) {
   return (
-    <button
+    <motion.button
       className={`mb-tab${isActive ? ' mb-tab--active' : ''}`}
       onClick={onClick}
       aria-selected={isActive}
       role="tab"
+      initial={{ width }}
+      animate={{ width }}
+      transition={tabSpring}
     >
       {tab.icon}
       <span className="mb-tab-label">{tab.label}</span>
-    </button>
+    </motion.button>
   )
 }
 
@@ -390,6 +414,7 @@ function ListItem({
         animate={{
           width: collapsed ? iconSize.collapsed : iconSize.expanded,
           height: collapsed ? iconSize.collapsed : iconSize.expanded,
+          borderRadius: collapsed ? 10 : 14,
         }}
         transition={iconSpring}
       >
@@ -447,6 +472,16 @@ const APPS: AppItem[] = [
 export function MiniBrowser() {
   const [activeTab, setActiveTab] = useState('shopify')
   const [collapsed, setCollapsed] = useState(false)
+  // Tracks which spring to use for tab width transitions — set alongside each
+  // state update so the cause of the width change is known at render time.
+  const [tabSpringKey, setTabSpringKey] = useState<'collapse' | 'expand' | 'switch'>('expand')
+
+  // ─── Tab widths ───────────────────────────────────────────────────────────
+  const tabWidths = TABS.map((tab) =>
+    collapsed && tab.id !== activeTab ? tab.widths.collapsed : tab.widths.expanded
+  )
+
+  // ──────────────────────────────────────────────────────────────────────────
 
   const dims = collapsed ? DIMENSIONS.collapsed : DIMENSIONS.expanded
   const dir = collapsed ? 'collapse' : 'expand'
@@ -490,6 +525,22 @@ export function MiniBrowser() {
       expand: {
         opacityDuration: [0.1, 0, 1] as [number, number, number],
         opacityDelay: [0.05, 0, 1] as [number, number, number],
+      },
+    },
+    tabSpring: {
+      collapse: {
+        duration: [0.5, 0, 1] as [number, number, number],
+        bounce: [0.35, 0, 1] as [number, number, number],
+        delay: [0, 0, 1] as [number, number, number],
+      },
+      expand: {
+        duration: [0.65, 0, 1] as [number, number, number],
+        bounce: [0.35, 0, 1] as [number, number, number],
+        delay: [0, 0, 1] as [number, number, number],
+      },
+      switch: {
+        duration: [0.35, 0, 1] as [number, number, number],
+        bounce: [0.2, 0, 1] as [number, number, number],
       },
     },
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -546,7 +597,28 @@ export function MiniBrowser() {
     },
   }
 
+  const TAB_SPRING = {
+    collapse: {
+      type: 'spring',
+      duration: p.tabSpring.collapse.duration,
+      bounce: p.tabSpring.collapse.bounce,
+      delay: p.tabSpring.collapse.delay,
+    },
+    expand: {
+      type: 'spring',
+      duration: p.tabSpring.expand.duration,
+      bounce: p.tabSpring.expand.bounce,
+      delay: p.tabSpring.expand.delay,
+    },
+    switch: {
+      type: 'spring',
+      duration: p.tabSpring.switch.duration,
+      bounce: p.tabSpring.switch.bounce,
+    },
+  }
+
   const rowSpring = LAYOUT_SPRING[dir]
+  const tabTransition = TAB_SPRING[tabSpringKey]
 
   return (
     <motion.div
@@ -560,14 +632,25 @@ export function MiniBrowser() {
     >
       {/* Browser bar */}
       <div className="mb-browser-bar">
-        <WindowControls collapsed={collapsed} onToggle={() => setCollapsed((c) => !c)} />
+        <WindowControls
+          collapsed={collapsed}
+          onToggle={() => {
+            setTabSpringKey(collapsed ? 'expand' : 'collapse')
+            setCollapsed((c) => !c)
+          }}
+        />
         <div className="mb-tab-bar" role="tablist" aria-label="Review platforms">
-          {TABS.map((tab) => (
+          {TABS.map((tab, i) => (
             <Tab
               key={tab.id}
               tab={tab}
               isActive={activeTab === tab.id}
-              onClick={() => setActiveTab(tab.id)}
+              onClick={() => {
+                setTabSpringKey('switch')
+                setActiveTab(tab.id)
+              }}
+              width={tabWidths[i]}
+              tabSpring={tabTransition}
             />
           ))}
         </div>
